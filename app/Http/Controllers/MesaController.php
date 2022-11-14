@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMesaRequest;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
 use App\Http\Resources\MesaResource;
@@ -25,18 +26,20 @@ class MesaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(StoreMesaRequest $request)
     {
-        $mesa = new Mesa;
-        $mesa->fname = $request->fname;
-        $mesa->lname = $request->lname;
-        $mesa->email = $request->email;
-        $mesa->password = $request->password;
-        $mesa->save();
-        return response()->json([
-            "message" => "Mesa record created",
-            "added" => $mesa
-        ], 201);
+        // $mesa = new Mesa;
+        // $mesa->fname = $request->fname;
+        // $mesa->lname = $request->lname;
+        // $mesa->email = $request->email;
+        // $mesa->password = $request->password;
+        // $mesa->save();
+        // return response()->json([
+        //     "message" => "Mesa record created",
+        //     "added" => $mesa
+        // ], 201);
+        return MesaResource::make(Mesa::create($request->validated()));
     }
 
     /**
